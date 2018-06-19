@@ -1,0 +1,742 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{SlackWikiPage\_trafficPrediction}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Slack Wikipedia page traffic
+prediction}\label{slack-wikipedia-page-traffic-prediction}
+
+    Data about Slack Wikipedia page are provided at the link
+https://tools.wmflabs.org/pageviews/?project=en.wikipedia.org\&platform=all-access\&agent=user\&range=all-time\&pages=Slack\_(software)
+.
+
+For this study, the time range 01/07/2015 - 15/06/2018 has been
+considered.
+
+The process is mainly based on Jason Brownlee methodology explained at
+the following links: -
+https://machinelearningmastery.com/convert-time-series-supervised-learning-problem-python/
+-
+https://machinelearningmastery.com/autoregression-models-time-series-forecasting-python/
+-
+https://machinelearningmastery.com/arima-for-time-series-forecasting-with-python/
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{from} \PY{n+nn}{functools} \PY{k}{import} \PY{n}{reduce}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{ar\PYZus{}model} \PY{k}{import} \PY{n}{AR}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{arima\PYZus{}model} \PY{k}{import} \PY{n}{ARIMA}
+         \PY{k+kn}{import} \PY{n+nn}{warnings}
+         \PY{k+kn}{import} \PY{n+nn}{datetime}
+\end{Verbatim}
+
+
+    \subsection{1.Data Exploration}\label{data-exploration}
+
+    I have downloaded the following data in csv format from Pageviews
+analytics (using pretty self-explanatory names for them): -
+'pageviews\_allPlatforms\_allAgents.csv' -
+'pageviews\_allPlatforms\_spider.csv' -
+'pageviews\_allPlatforms\_user.csv' -
+'pageviews\_desktop\_allAgents.csv' - 'pageviews\_desktop\_spider.csv' -
+'pageviews\_desktop\_user.csv' - 'pageviews\_mobileApp\_allAgents.csv' -
+'pageviews\_mobileApp\_user.csv' - 'pageviews\_mobileWeb\_allAgents.csv'
+- 'pageviews\_mobileWeb\_spider.csv' - 'pageviews\_mobileWeb\_user.csv'
+
+I will join them in a single Dataframe in order to perform some data
+visualization and make some descriptive statistics and exploration:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{files} \PY{o}{=} \PY{o}{!}ls *.csv 
+         \PY{n}{df\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{files}\PY{p}{]}
+         \PY{n}{views} \PY{o}{=} \PY{n}{reduce}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{:} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{on} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{df\PYZus{}list}\PY{p}{)}
+         
+         \PY{n}{views}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{allPlt\PYZus{}allAg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{allPlt\PYZus{}sp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{allPlt\PYZus{}us}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deskt\PYZus{}allAg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deskt\PYZus{}sp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deskt\PYZus{}us}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mobApp\PYZus{}allAg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mobApp\PYZus{}us}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mobWeb\PYZus{}allAg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mobWeb\PYZus{}sp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mobWeb\PYZus{}us}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{views}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}93}]:}             allPlt\_allAg  allPlt\_sp  allPlt\_us  deskt\_allAg  deskt\_sp  \textbackslash{}
+         Date                                                                    
+         2015-07-01           996         49        947          805        49   
+         2015-07-02           864         34        830          701        34   
+         2015-07-03           748         37        711          564        35   
+         2015-07-04           427         47        380          277        46   
+         2015-07-05           423         21        402          256        20   
+         
+                     deskt\_us  mobApp\_allAg  mobApp\_us  mobWeb\_allAg  mobWeb\_sp  \textbackslash{}
+         Date                                                                     
+         2015-07-01       756             3          3           188          0   
+         2015-07-02       667            10         10           153          0   
+         2015-07-03       529             7          7           177          2   
+         2015-07-04       231             6          6           144          1   
+         2015-07-05       236             2          2           165          1   
+         
+                     mobWeb\_us  
+         Date                   
+         2015-07-01        188  
+         2015-07-02        153  
+         2015-07-03        175  
+         2015-07-04        143  
+         2015-07-05        164  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{views}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}94}]:}        allPlt\_allAg    allPlt\_sp    allPlt\_us  deskt\_allAg     deskt\_sp  \textbackslash{}
+         count   1081.000000  1081.000000  1081.000000  1081.000000  1081.000000   
+         mean    1467.577243    32.831637  1434.745606  1059.454209    29.470860   
+         std      648.294080    19.181380   643.945944   491.545156    18.298232   
+         min        0.000000     0.000000     0.000000     0.000000     0.000000   
+         25\%      933.000000    22.000000   900.000000   579.000000    19.000000   
+         50\%     1516.000000    28.000000  1484.000000  1139.000000    25.000000   
+         75\%     1800.000000    40.000000  1763.000000  1381.000000    36.000000   
+         max     8859.000000   213.000000  8818.000000  4736.000000   210.000000   
+         
+                   deskt\_us  mobApp\_allAg    mobApp\_us  mobWeb\_allAg    mobWeb\_sp  \textbackslash{}
+         count  1081.000000   1081.000000  1081.000000   1081.000000  1081.000000   
+         mean   1029.983349     17.889917    17.889917    390.233117     3.360777   
+         std     487.334361     12.866836    12.866836    209.293466     4.178572   
+         min       0.000000      0.000000     0.000000      0.000000     0.000000   
+         25\%     550.000000     12.000000    12.000000    294.000000     1.000000   
+         50\%    1109.000000     16.000000    16.000000    345.000000     2.000000   
+         75\%    1346.000000     21.000000    21.000000    411.000000     4.000000   
+         max    4705.000000    291.000000   291.000000   3832.000000    73.000000   
+         
+                  mobWeb\_us  
+         count  1081.000000  
+         mean    386.872340  
+         std     208.633931  
+         min       0.000000  
+         25\%     292.000000  
+         50\%     342.000000  
+         75\%     407.000000  
+         max    3822.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{views}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{box}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{n}{sort\PYZus{}columns} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}95}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x188890a5f98>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{n}{vplot} \PY{o}{=} \PY{n}{views}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{allPlt\PYZus{}sp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{allPlt\PYZus{}us}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deskt\PYZus{}allAg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deskt\PYZus{}sp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mobWeb\PYZus{}us}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{sort\PYZus{}columns} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{,} \PY{n}{subplots} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{vplot} \PY{o}{=} \PY{n}{views}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{allPlt\PYZus{}us}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{allPlt\PYZus{}sp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deskt\PYZus{}allAg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mobWeb\PYZus{}allAg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{sort\PYZus{}columns} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{vplot}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{prop}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{20}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}97}]:} <matplotlib.legend.Legend at 0x1888a049390>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In general, it seems like the total number of visits is affected by the
+agent 'user', and generally the trend can be considered the same for all
+the platforms. Hence, for simplicity, the overall number of visits
+without differentiating between agents and platforms will be used.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{allViews} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{o}{.}\PY{n}{from\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pageviews\PYZus{}allPlatforms\PYZus{}allAgents.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{all\PYZus{}Views\PYZus{}2015} \PY{o}{=} \PY{n}{allViews}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2015}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{all\PYZus{}Views\PYZus{}2016} \PY{o}{=} \PY{n}{allViews}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{all\PYZus{}Views\PYZus{}2017} \PY{o}{=} \PY{n}{allViews}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{all\PYZus{}Views\PYZus{}2018} \PY{o}{=} \PY{n}{allViews}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{all\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{all\PYZus{}Views\PYZus{}2015}\PY{p}{,} \PY{n}{all\PYZus{}Views\PYZus{}2016}\PY{p}{,} \PY{n}{all\PYZus{}Views\PYZus{}2017}\PY{p}{,} \PY{n}{all\PYZus{}Views\PYZus{}2018}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{all\PYZus{}df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{sort\PYZus{}columns} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{,} \PY{n}{subplots} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}98}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18885baf588>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    A yearly periodicity is visible dividing the dataset year by year.
+
+    \subsection{2.Creation of a lagged
+dataset}\label{creation-of-a-lagged-dataset}
+
+    Creating a lagged dataset I'll be able to make autocorrelation studies
+and to proceed with an autoregression model at the next step.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{views\PYZus{}vals} \PY{o}{=} \PY{n}{views}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{allPlt\PYZus{}allAg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{df\PYZus{}model} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{views\PYZus{}vals}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{views\PYZus{}vals}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{df\PYZus{}model}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Previous\PYZus{}Step}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Next\PYZus{}Step}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{df\PYZus{}model}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}99}]:}             Previous\_Step  Next\_Step
+         Date                                
+         2015-07-01            NaN        996
+         2015-07-02          996.0        864
+         2015-07-03          864.0        748
+         2015-07-04          748.0        427
+         2015-07-05          427.0        423
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{plotting}\PY{o}{.}\PY{n}{autocorrelation\PYZus{}plot}\PY{p}{(}\PY{n}{views}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{allPlt\PYZus{}allAg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}100}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18885621780>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{df\PYZus{}model}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}101}]:}                Previous\_Step  Next\_Step
+          Previous\_Step       1.000000   0.559448
+          Next\_Step           0.559448   1.000000
+\end{Verbatim}
+            
+    Looking at autocorrelation plot and correlation of the lagged dataset, a
+positive high correlation of 0.55 makes possible to deal with the time
+series problem as an autoregression problem.
+
+    \subsection{3.Autoregression}\label{autoregression}
+
+    I will keep the first 95\% of the observations for training and the
+remaining portion for evaluation, excluding the first row of data during
+the split (it contains a NaN value because there's no previous step for
+it). Each of the train and test sets are then split into the input and
+output variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{train\PYZus{}size} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{views\PYZus{}vals}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.95}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}training dataset}
+          \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{views\PYZus{}vals}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{train\PYZus{}size}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}test dataset}
+          \PY{n}{test\PYZus{}df} \PY{o}{=} \PY{n}{views\PYZus{}vals}\PY{p}{[}\PY{n}{train\PYZus{}size}\PY{p}{:}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}AR MODEL}
+          \PY{n}{ar\PYZus{}model} \PY{o}{=} \PY{n}{AR}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{)}
+          \PY{n}{ar\PYZus{}model\PYZus{}fit} \PY{o}{=} \PY{n}{ar\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lag: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{ar\PYZus{}model\PYZus{}fit}\PY{o}{.}\PY{n}{k\PYZus{}ar}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Coefficients: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{ar\PYZus{}model\PYZus{}fit}\PY{o}{.}\PY{n}{params}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}PREDICTIONS}
+          \PY{n}{predictions} \PY{o}{=} \PY{n}{ar\PYZus{}model\PYZus{}fit}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{start} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{)}\PY{p}{,} \PY{n}{end} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}df}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dynamic} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{error} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test MSE: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{error}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Lag: 21
+Coefficients: const               338.794074
+L1.allPlt\_allAg       0.613817
+L2.allPlt\_allAg      -0.132229
+L3.allPlt\_allAg       0.030479
+L4.allPlt\_allAg       0.060543
+L5.allPlt\_allAg      -0.063141
+L6.allPlt\_allAg       0.057240
+L7.allPlt\_allAg       0.271338
+L8.allPlt\_allAg      -0.118604
+L9.allPlt\_allAg      -0.076491
+L10.allPlt\_allAg      0.043324
+L11.allPlt\_allAg     -0.038227
+L12.allPlt\_allAg     -0.016976
+L13.allPlt\_allAg      0.059953
+L14.allPlt\_allAg      0.136551
+L15.allPlt\_allAg     -0.115468
+L16.allPlt\_allAg     -0.023739
+L17.allPlt\_allAg      0.009757
+L18.allPlt\_allAg     -0.091655
+L19.allPlt\_allAg      0.031117
+L20.allPlt\_allAg      0.014011
+L21.allPlt\_allAg      0.120477
+dtype: float64
+Test MSE: 150095.407
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{index}\PY{p}{)}\PY{p}{,}\PY{n}{test\PYZus{}df}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The lag value will be useful for the ARIMA model at the next step.
+
+    \subsection{4. ARIMA Forecasting}\label{arima-forecasting}
+
+    In order to speed up the analysis, I will use a reduced dataset for
+training and testing. As a p parameter for the ARIMA model, I will use
+the Lag 21 obtained from the previous AR model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{c+c1}{\PYZsh{}ARIMA MODEL}
+          
+          \PY{n}{new\PYZus{}train} \PY{o}{=} \PY{n}{allViews}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2017}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{new\PYZus{}test} \PY{o}{=} \PY{n}{allViews}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018\PYZhy{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2018\PYZhy{}05}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{n}{arima\PYZus{}model} \PY{o}{=} \PY{n}{ARIMA}\PY{p}{(}\PY{n}{new\PYZus{}train}\PY{p}{,} \PY{n}{order} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+          \PY{n}{arima\PYZus{}model\PYZus{}fit} \PY{o}{=} \PY{n}{arima\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+          \PY{n}{arima\PYZus{}model\PYZus{}fit}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}109}]:} <class 'statsmodels.iolib.summary.Summary'>
+          """
+                                       ARIMA Model Results                              
+          ==============================================================================
+          Dep. Variable:     D.Slack (software)   No. Observations:                  364
+          Model:                 ARIMA(3, 1, 0)   Log Likelihood               -2819.774
+          Method:                       css-mle   S.D. of innovations            559.572
+          Date:                Mon, 18 Jun 2018   AIC                           5649.548
+          Time:                        11:57:56   BIC                           5669.033
+          Sample:                    01-02-2017   HQIC                          5657.292
+                                   - 12-31-2017                                         
+          ============================================================================================
+                                         coef    std err          z      P>|z|      [0.025      0.975]
+          --------------------------------------------------------------------------------------------
+          const                       -0.5175     19.587     -0.026      0.979     -38.908      37.873
+          ar.L1.D.Slack (software)     0.0066      0.052      0.126      0.900      -0.095       0.109
+          ar.L2.D.Slack (software)    -0.3843      0.048     -8.035      0.000      -0.478      -0.291
+          ar.L3.D.Slack (software)    -0.1227      0.052     -2.364      0.019      -0.224      -0.021
+                                              Roots                                    
+          =============================================================================
+                            Real          Imaginary           Modulus         Frequency
+          -----------------------------------------------------------------------------
+          AR.1            0.2998           -1.4471j            1.4778           -0.2175
+          AR.2            0.2998           +1.4471j            1.4778            0.2175
+          AR.3           -3.7313           -0.0000j            3.7313           -0.5000
+          -----------------------------------------------------------------------------
+          """
+\end{Verbatim}
+            
+    \subsubsection{Plot of residual error}\label{plot-of-residual-error}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{residuals} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{arima\PYZus{}model\PYZus{}fit}\PY{o}{.}\PY{n}{resid}\PY{p}{)}
+          \PY{n}{residuals}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{n}{residuals}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{n}{residuals}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}110}]:}                  0
+          count   364.000000
+          mean      1.287024
+          std     560.522211
+          min   -2669.515402
+          25\%    -181.105308
+          50\%       5.126032
+          75\%     288.881112
+          max    4943.553215
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}PREDICTIONS with test data}
+        
+        \PY{n}{predictions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{history} \PY{o}{=} \PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{new\PYZus{}train}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{new\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+        	\PY{n}{model} \PY{o}{=} \PY{n}{ARIMA}\PY{p}{(}\PY{n}{history}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+        	\PY{n}{model\PYZus{}fit} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{disp}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        	\PY{n}{output} \PY{o}{=} \PY{n}{model\PYZus{}fit}\PY{o}{.}\PY{n}{forecast}\PY{p}{(}\PY{p}{)}
+        	\PY{n}{yhat} \PY{o}{=} \PY{n}{output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        	\PY{n}{predictions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{yhat}\PY{p}{)}
+        	\PY{n}{obs} \PY{o}{=} \PY{n}{new\PYZus{}test}\PY{p}{[}\PY{n}{t}\PY{p}{]}
+        	\PY{n}{history}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{obs}\PY{p}{)}
+        	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted=}\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{, expected=}\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{yhat}\PY{p}{,} \PY{n}{obs}\PY{p}{)}\PY{p}{)}
+            
+        \PY{n}{error} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{p}{,} \PY{n}{predictions}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test MSE: }\PY{l+s+si}{\PYZpc{}.3f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{error}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} plot}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{test\PYZus{}df}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{predictions}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{5.Next year forecast}\label{next-year-forecast}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Next year prediction}
+        
+        \PY{n}{predictions\PYZus{}ny} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{t\PYZus{}1} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{365}\PY{p}{)}\PY{p}{:}
+            \PY{n}{model} \PY{o}{=} \PY{n}{ARIMA}\PY{p}{(}\PY{n}{history}\PY{p}{,} \PY{n}{order} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{21}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+            \PY{n}{model\PYZus{}fit} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{disp}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{output} \PY{o}{=} \PY{n}{model\PYZus{}fit}\PY{o}{.}\PY{n}{forecast}\PY{p}{(}\PY{p}{)}
+            \PY{n}{yhat} \PY{o}{=} \PY{n}{output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{predictions\PYZus{}ny}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{yhat}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{allViews}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{predictions\PYZus{}ny}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
